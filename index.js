@@ -18,31 +18,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
 
-// Star Wars Characters (DATA)
-// =============================================================
-// var characters = [
-//   {
-//     routeName: "yoda",
-//     name: "Yoda",
-//     role: "Jedi Master",
-//     age: 900,
-//     forcePoints: 2000
-//   },
-//   {
-//     routeName: "darthmaul",
-//     name: "Darth Maul",
-//     role: "Sith Lord",
-//     age: 200,
-//     forcePoints: 1200
-//   },
-//   {
-//     routeName: "obiwankenobi",
-//     name: "Obi Wan Kenobi",
-//     role: "Jedi Master",
-//     age: 55,
-//     forcePoints: 1350
-//   }
-// ];
 
 // Routes
 // =============================================================
@@ -64,15 +39,15 @@ app.get("/notes", function(req, res) {
 // GET read the `db.json` file and return the saved notes in json
 app.get("/api/notes", function (req, res) {
   readFileAsync("./db/db.json", "utf8").then(function (data) {
+    
       data = JSON.parse(data)
-      //  console.log("get/api/notes from db");
-      //  console.log(data)
+       console.log("get/api/notes from db");
+      console.log(data)
       return res.json(data);
+    
   })
 });
 
-
-let notesArray=[];
 
 // Create New Notes - takes in JSON input
 app.post("/api/notes", function(req, res) {
@@ -92,11 +67,11 @@ app.post("/api/notes", function(req, res) {
      data.push(newNotes);
      console.log(data);
 
-    data.push(data[data.length - 1].id=data.length-1) 
-    data[data.length - 1].id=data.length-1;
+     //add an id to the note that is the index of the array
+     data[data.length - 1].id=data.length-1;
 
-   // once the new note is pushed to the end of the data array then write the existing 
-   //notes and newly added not back to the db.json file
+   // once the new note is pushed to the end of the data array, write the existing 
+   //notes and newly added note back to the db.json file
     writeFileAsync("./db/db.json", JSON.stringify(data));
 })
 
