@@ -11,7 +11,13 @@ const readFileAsync = util.promisify(fs.readFile);
 // Sets up the Express App
 // =============================================================
 var app = express();
-var PORT = 2000;
+//In order to make sure your server works on local & heroku you have to make sure the commandline looks like this
+//process.env.PORT=heroku's port or local port
+const PORT = process.env.PORT || 3000;
+app.use(express.urlencoded({
+    extended: true
+}));
+
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
@@ -54,7 +60,7 @@ app.delete("/api/notes/:id", function (req, res) {
   readFileAsync("./db/db.json", "utf8").then(function (data) {
     console.log("api delete note");
     var deleteid = req.params.id;
-    console.log(deleteid);
+    // console.log(deleteid);
     //read the db.json file to grab the arrays of object and return json
     readFileAsync("./db/db.json", "utf8").then(function (data) {
       //turn object into string
