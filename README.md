@@ -21,3 +21,4 @@ Application should allow users to delete previously saved notes.
 
 ![Notepad Note Taker](screenshot.jpg)
 
+![Notpad Note Taker2](screenshot2.jpg)
